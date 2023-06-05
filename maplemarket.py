@@ -10,8 +10,8 @@ from pandas import DataFrame as df
 from tabulate import tabulate
 import time
 
-options = Options()
-options.headless = True
+options = Options() 
+options.add_argument("-headless") 
 driver = webdriver.Firefox(options=options)
 inventory_sheet = pd.read_excel("/home/swiggityyy/Desktop/mtest.xlsx", sheet_name="Sheet1")
 df = pd.DataFrame(inventory_sheet)
@@ -25,10 +25,10 @@ waitsearch = WebDriverWait(driver, 10).until(
 item_name = driver.find_element(By.XPATH, "/html/body/main/div/div[1]/div[1]/div[2]/div[1]/div[2]/input")
 
 x = 0
-while x <38:
+while x <48:
     item_name.clear()
     item_name.send_keys(df.iloc[x,0])
-    time.sleep(1)
+    # time.sleep(1)
     item_name.send_keys(Keys.RETURN)
     try:
         price = driver.find_element(By.XPATH, "./html/body/main/div[1]/div[2]/div/div/div[7]")
